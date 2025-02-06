@@ -1,11 +1,18 @@
 package my.app.first_project.controller;
 
+import my.app.first_project.dto.Animal;
+import my.app.first_project.dto.Fruits;
 import my.app.first_project.dto.UserData;
 import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/basic")
@@ -30,6 +37,31 @@ public class ThymeleafController {
         System.out.println(userData);
         model.addAttribute("userData", userData);
         model.addAttribute("data", "장원영");
+
+//        리스트 작업하기
+        List<Fruits> fruits = new ArrayList<>();
+        Fruits apple = new Fruits("사과", "신 맛");
+        Fruits mango = new Fruits("망고", "노란 맛");
+
+        fruits.add(apple);
+        fruits.add(mango);
+
+        model.addAttribute("fruits", fruits);
+        System.out.println(fruits);
+
+//        맵으로 작업하기
+        Map<String, Animal> animalMap = new HashMap<>();
+        Animal dog = new Animal();
+        dog.setName("멍멍이");
+        dog.setSound("멍멍");
+
+        Animal cat = new Animal();
+        cat.setName("야옹이");
+        cat.setSound("야옹");
+
+        animalMap.put("dog", dog);
+        animalMap.put("cat", cat);
+        model.addAttribute("map", animalMap);
         return "/basic/variables";
     }
 }
